@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/scheduleAlarmTxt"
+            style="@style/MyKotlinAlarmClock.TextAppearance.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Schedule Alarm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/timePickerViewGroup" />
+
+        <LinearLayout
+            android:id="@+id/timePickerViewGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/view_margin"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scheduleAlarmTxt"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alarm Time"
+                android:layout_margin="@dimen/regular_text_margin" />
+
+            <TimePicker
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:timePickerMode="spinner" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextAlarmTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="@dimen/view_margin"
+            android:inputType="textPersonName"
+            android:hint="Alarm Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timePickerViewGroup" />
+
+        <CheckBox
+            android:id="@+id/recurringCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recurring Alarm"
+            android:layout_margin="@dimen/view_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextAlarmTitle" />
+
+        <LinearLayout
+            android:id="@+id/daysCheckBoxes"
+            android:layout_width="match_parent"
+            android:padding="@dimen/view_margin"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/recurringCheckBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <CheckBox
+                android:id="@+id/monCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mon" />
+
+            <CheckBox
+                android:id="@+id/tueCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tue" />
+
+            <CheckBox
+                android:id="@+id/wedCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wed" />
+
+            <CheckBox
+                android:id="@+id/thurCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thur" />
+
+            <CheckBox
+                android:id="@+id/friCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fri" />
+
+            <CheckBox
+                android:id="@+id/satCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sat" />
+
+            <CheckBox
+                android:id="@+id/sunCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sun" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/scheduleAlarmBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCHEDULE ALARM"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/MyKotlinAlarmClock.Button.Regular"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
