@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host.xml"
+    app:startDestination="@id/alarmListFragment">
+    <fragment
+        android:id="@+id/setAlarmFragment"
+        android:name="com.example.android.mykotlinalarmclock.screens.createalarm.SetAlarmFragment"
+        android:label="SetAlarmFragment"
+        tools:layout="@layout/fragment_set_alarm">
+        <action
+            android:id="@+id/action_setAlarmFragment_to_alarmListFragment"
+            app:destination="@id/alarmListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alarmListFragment"
+        android:name="com.example.android.mykotlinalarmclock.screens.alarmdisplay.AlarmListFragment"
+        android:label="AlarmListFragment"
+        tools:layout="@layout/alarm_list_fragment">
+        <action
+            android:id="@+id/action_alarmListFragment_to_setAlarmFragment"
+            app:destination="@id/setAlarmFragment" />
+    </fragment>
+</navigation>
