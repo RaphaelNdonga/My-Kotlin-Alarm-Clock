@@ -9,15 +9,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.mykotlinalarmclock.R
+import com.example.android.mykotlinalarmclock.data.AlarmDao
 import com.example.android.mykotlinalarmclock.databinding.AlarmListFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AlarmListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AlarmListFragment()
-    }
-
     private lateinit var viewModel: AlarmListViewModel
+
+    @Inject
+    lateinit var dao:AlarmDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +32,12 @@ class AlarmListFragment : Fragment() {
             container,
             false
         )
-        viewModel = ViewModelProvider(this).get(AlarmListViewModel::class.java)
+        val adapter = AlarmAdapter()
+        binding.alarmRecyclerView.adapter = adapter
+        viewModel = ViewModelProvider(this,AlarmListViewModelFactory(dao)).get(AlarmListViewModel::class.java)
+
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         binding.addAlarmBtn.setOnClickListener {
             findNavController().navigate(R.id.action_alarmListFragment_to_setAlarmFragment)
         }

@@ -40,6 +40,7 @@
                 android:layout_margin="@dimen/regular_text_margin" />
 
             <TimePicker
+                android:id="@+id/set_alarm_time_picker"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"

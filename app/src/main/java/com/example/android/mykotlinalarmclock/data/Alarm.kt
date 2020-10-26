@@ -10,13 +10,13 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "alarm_table")
 data class Alarm(
     @PrimaryKey(autoGenerate = true)
-    val alarmId: Int,
+    val alarmId: Int = 0,
     @ColumnInfo(name = "hour")
     val hour: Int,
     @ColumnInfo(name = "minute")
     val minute: Int,
     @ColumnInfo(name = "started")
-    var started: Boolean,
+    var started: Boolean = false,
     @ColumnInfo(name = "recurring")
     val recurring: Boolean,
     @ColumnInfo(name = "monday")

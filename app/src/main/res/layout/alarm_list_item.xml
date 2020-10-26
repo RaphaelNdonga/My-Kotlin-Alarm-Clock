@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="alarm"
+            type="com.example.android.mykotlinalarmclock.data.Alarm" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_view_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/alarm_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:alarmTime="@{alarm}"
+                android:layout_marginBottom="5dp"
+                style="@style/MyKotlinAlarmClock.TextAppearance.Time" />
+
+            <TextView
+                android:id="@+id/alarm_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@{alarm.title}"
+                style="@style/MyKotlinAlarmClock.TextAppearance.Regular" />
+
+            <TextView
+                android:id="@+id/alarm_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                app:alarmRecurringDays="@{alarm}"
+                style="@style/MyKotlinAlarmClock.TextAppearance.Regular" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

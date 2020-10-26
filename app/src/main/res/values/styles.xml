@@ -12,5 +12,8 @@
     <style name="MyKotlinAlarmClock.Button.Regular" parent="Widget.AppCompat.ActionButton">
         <item name="android:layout_margin">@dimen/view_margin</item>
     </style>
+    <style name="MyKotlinAlarmClock.TextAppearance.Time" parent="TextAppearance.AppCompat.Large">
+        <item name="android:layout_margin">@dimen/regular_text_margin</item>
+    </style>
 
 </resources>
