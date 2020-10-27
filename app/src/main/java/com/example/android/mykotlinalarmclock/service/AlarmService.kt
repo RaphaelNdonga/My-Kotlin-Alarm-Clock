@@ -34,13 +34,12 @@ class AlarmService : Service() {
             NotificationCompat.Builder(this, CHANNEL_ID).setContentTitle(alarmTitle)
                 .setContentText("Ring... Ring").setSmallIcon(R.drawable.ic_alarm_black)
                 .setContentIntent(pendingIntent)
-                .build()
 
         mediaPlayer.start()
-
         val pattern: LongArray = longArrayOf(0, 100, 1000)
-
         vibrator.vibrate(pattern, 0)
+
+        startForeground(1,notificationBuilder.build())
 
         return START_STICKY
     }

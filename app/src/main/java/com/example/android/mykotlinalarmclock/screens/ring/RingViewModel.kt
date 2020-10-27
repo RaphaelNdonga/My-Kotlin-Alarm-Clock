@@ -1,20 +1,14 @@
 package com.example.android.mykotlinalarmclock.screens.ring
 
-import android.app.AlarmManager
 import android.app.Application
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import android.widget.Toast
-import androidx.core.content.getSystemService
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.android.mykotlinalarmclock.data.Alarm
-import com.example.android.mykotlinalarmclock.receiver.AlarmBroadcastReceiver
 import com.example.android.mykotlinalarmclock.service.AlarmService
-import com.example.android.mykotlinalarmclock.utils.*
+import com.example.android.mykotlinalarmclock.utils.Event
+import com.example.android.mykotlinalarmclock.utils.scheduleAlarm
 import java.util.*
 
 class RingViewModel(private val app: Application) : AndroidViewModel(app){

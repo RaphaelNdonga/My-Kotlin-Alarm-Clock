@@ -7,29 +7,44 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.mykotlinalarmclock.data.Alarm
 import com.example.android.mykotlinalarmclock.databinding.AlarmListItemBinding
+import com.example.android.mykotlinalarmclock.utils.OnToggleAlarmListener
 
-class AlarmAdapter:ListAdapter<Alarm, AlarmAdapter.ViewHolder>(DiffUtilCallback()) {
-    class ViewHolder(private val binding:AlarmListItemBinding):RecyclerView.ViewHolder(binding.root) {
+class AlarmAdapter(private val switchListener: OnToggleAlarmListener) :
+    ListAdapter<Alarm, AlarmAdapter.ViewHolder>(DiffUtilCallback()) {
+    class ViewHolder(
+        val binding: AlarmListItemBinding,
+        private val switchListener: OnToggleAlarmListener
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(alarm: Alarm?) {
-            binding.executePendingBindings()
-            binding.alarm = alarm
+            alarm?.let {
+                binding.executePendingBindings()
+                binding.alarm = alarm
+                binding.alarmSwitch.setOnCheckedChangeListener { _, _ ->
+                    switchListener.onToggle(alarm)
+                }
+            }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = AlarmListItemBinding.inflate(layoutInflater,parent,false)
-        return ViewHolder(binding)
+        val binding = AlarmListItemBinding.inflate(layoutInflater, parent, false)
+        return ViewHolder(binding, switchListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val alarm = getItem(position)
         holder.bind(alarm)
     }
+
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.alarmSwitch.setOnCheckedChangeListener(null)
+    }
 }
 
-class DiffUtilCallback: DiffUtil.ItemCallback<Alarm>(){
+class DiffUtilCallback : DiffUtil.ItemCallback<Alarm>() {
     override fun areItemsTheSame(oldItem: Alarm, newItem: Alarm): Boolean {
         return oldItem.alarmId == newItem.alarmId
     }

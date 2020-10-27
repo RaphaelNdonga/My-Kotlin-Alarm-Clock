@@ -8,6 +8,7 @@ import android.content.Intent
 import android.widget.Toast
 import com.example.android.mykotlinalarmclock.data.Alarm
 import com.example.android.mykotlinalarmclock.receiver.AlarmBroadcastReceiver
+import timber.log.Timber
 import java.util.*
 
 const val RECURRING:String = "RECURRING"
@@ -122,4 +123,13 @@ fun scheduleAlarm(alarm: Alarm,app:Application) {
         days += "Su "
     }
      return days
+}
+
+fun cancelAlarm(alarm: Alarm,app:Application) {
+    val alarmManager = app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    val intent = Intent(app, AlarmBroadcastReceiver::class.java)
+    val pendingIntent = PendingIntent.getBroadcast(app, alarm.alarmId, intent, 0)
+    alarmManager.cancel(pendingIntent)
+
+    Timber.i("Alarm set for ${alarm.hour}:${alarm.minute} with id ${alarm.alarmId} has been cancelled.")
 }

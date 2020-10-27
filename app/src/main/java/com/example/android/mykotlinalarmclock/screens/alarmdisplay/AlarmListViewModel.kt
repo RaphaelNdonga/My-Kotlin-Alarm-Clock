@@ -12,5 +12,17 @@ class AlarmListViewModel(private val dao: AlarmDao) : ViewModel() {
 
     val alarmList:LiveData<List<Alarm>> = dao.observeAllAlarms()
 
+    fun update(alarm: Alarm){
+        uiScope.launch {
+            daoUpdate(alarm)
+        }
+    }
+
+    private suspend fun daoUpdate(alarm:Alarm){
+        withContext(Dispatchers.IO){
+            dao.update(alarm)
+        }
+    }
+
 
 }

@@ -34,15 +34,4 @@ class SetAlarmViewModel(private val app: Application,private val dao: AlarmDao) 
             dao.insert(alarm)
         }
     }
-
-    fun cancelAlarm(alarm: Alarm) {
-        val alarmManager = app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(app, AlarmBroadcastReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(app, alarm.alarmId, intent, 0)
-        alarmManager.cancel(pendingIntent)
-
-        Timber.i("Alarm set for ${alarm.hour}:${alarm.minute} with id ${alarm.alarmId} has been cancelled.")
-    }
-
-
 }

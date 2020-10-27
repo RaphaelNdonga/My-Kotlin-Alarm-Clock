@@ -11,7 +11,9 @@
         tools:layout="@layout/fragment_set_alarm">
         <action
             android:id="@+id/action_setAlarmFragment_to_alarmListFragment"
-            app:destination="@id/alarmListFragment" />
+            app:destination="@id/alarmListFragment"
+            app:popUpTo="@id/alarmListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/alarmListFragment"

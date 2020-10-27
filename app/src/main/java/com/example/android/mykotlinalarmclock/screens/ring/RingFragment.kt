@@ -26,8 +26,10 @@ class RingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<RingFragmentBinding>(inflater,R.layout.ring_fragment,container,false)
-        viewModel = ViewModelProvider(this).get(RingViewModel::class.java)
+        binding = DataBindingUtil.inflate(inflater,R.layout.ring_fragment,container,false)
+
+        val application = requireActivity().application
+        viewModel = ViewModelProvider(this,RingViewModelFactory(application)).get(RingViewModel::class.java)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
