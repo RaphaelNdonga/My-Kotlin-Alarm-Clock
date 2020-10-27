@@ -16,15 +16,16 @@ import com.example.android.mykotlinalarmclock.utils.OnToggleAlarmListener
 import com.example.android.mykotlinalarmclock.utils.cancelAlarm
 import com.example.android.mykotlinalarmclock.utils.scheduleAlarm
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AlarmListFragment : Fragment(),OnToggleAlarmListener {
+class AlarmListFragment : Fragment(), OnToggleAlarmListener {
 
     private lateinit var viewModel: AlarmListViewModel
 
     @Inject
-    lateinit var dao:AlarmDao
+    lateinit var dao: AlarmDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +39,10 @@ class AlarmListFragment : Fragment(),OnToggleAlarmListener {
         )
         val adapter = AlarmAdapter(this)
         binding.alarmRecyclerView.adapter = adapter
-        viewModel = ViewModelProvider(this,AlarmListViewModelFactory(dao)).get(AlarmListViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            AlarmListViewModelFactory(dao)
+        ).get(AlarmListViewModel::class.java)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -50,13 +54,15 @@ class AlarmListFragment : Fragment(),OnToggleAlarmListener {
     }
 
     override fun onToggle(alarm: Alarm) {
-        if(alarm.started){
-            cancelAlarm(alarm,requireActivity().application)
+        if (alarm.started) {
+            cancelAlarm(alarm, requireActivity().application)
             viewModel.update(alarm)
+            Timber.i("Alarm scheduled for ${alarm.hour}:${alarm.minute} started is ${alarm.started}")
             return
         }
         scheduleAlarm(alarm, requireActivity().application)
         viewModel.update(alarm)
+        Timber.i("Alarm scheduled for ${alarm.hour}:${alarm.minute} started is ${alarm.started}")
     }
 
 }

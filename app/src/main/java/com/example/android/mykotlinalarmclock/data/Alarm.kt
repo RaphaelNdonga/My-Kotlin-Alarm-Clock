@@ -5,12 +5,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import kotlin.random.Random
 
 @Parcelize
 @Entity(tableName = "alarm_table")
 data class Alarm(
-    @PrimaryKey(autoGenerate = true)
-    val alarmId: Int = 0,
+    @PrimaryKey
+    var alarmId: Int = Random.nextInt(Integer.MAX_VALUE),
     @ColumnInfo(name = "hour")
     val hour: Int,
     @ColumnInfo(name = "minute")

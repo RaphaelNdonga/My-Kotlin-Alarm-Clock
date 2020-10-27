@@ -12,7 +12,9 @@ import com.example.android.mykotlinalarmclock.R
 import com.example.android.mykotlinalarmclock.data.Alarm
 import com.example.android.mykotlinalarmclock.data.AlarmDao
 import com.example.android.mykotlinalarmclock.databinding.FragmentSetAlarmBinding
+import com.example.android.mykotlinalarmclock.utils.EventObserver
 import com.example.android.mykotlinalarmclock.utils.TimePickerUtil
+import com.example.android.mykotlinalarmclock.utils.scheduleAlarm
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_set_alarm.*
 import javax.inject.Inject

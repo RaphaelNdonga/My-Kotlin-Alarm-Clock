@@ -6,24 +6,25 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import com.example.android.mykotlinalarmclock.data.Alarm
 import com.example.android.mykotlinalarmclock.receiver.AlarmBroadcastReceiver
 import timber.log.Timber
 import java.util.*
 
-const val RECURRING:String = "RECURRING"
-const val MONDAY:String = "MONDAY"
-const val TUESDAY:String = "TUESDAY"
-const val WEDNESDAY:String = "WEDNESDAY"
-const val THURSDAY:String = "THURSDAY"
-const val FRIDAY:String = "FRIDAY"
-const val SATURDAY:String = "SATURDAY"
-const val SUNDAY:String = "SUNDAY"
-const val TITLE:String = "TITLE"
-const val RUN_DAILY:Long = 24*60*60*1000
-const val CHANNEL_ID:String = "ALARM_SERVICE_CHANNEL"
+const val RECURRING: String = "RECURRING"
+const val MONDAY: String = "MONDAY"
+const val TUESDAY: String = "TUESDAY"
+const val WEDNESDAY: String = "WEDNESDAY"
+const val THURSDAY: String = "THURSDAY"
+const val FRIDAY: String = "FRIDAY"
+const val SATURDAY: String = "SATURDAY"
+const val SUNDAY: String = "SUNDAY"
+const val TITLE: String = "TITLE"
+const val RUN_DAILY: Long = 24 * 60 * 60 * 1000
+const val CHANNEL_ID: String = "ALARM_SERVICE_CHANNEL"
 
-fun scheduleAlarm(alarm: Alarm,app:Application) {
+fun scheduleAlarm(alarm: Alarm, app: Application) {
 
     val alarmManager = app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -95,8 +96,10 @@ fun scheduleAlarm(alarm: Alarm,app:Application) {
 
     }
     alarm.started = true
+    Timber.i("Alarm set for ${alarm.hour}:${alarm.minute} with id ${alarm.alarmId} and started value is ${alarm.started} has been scheduled.")
 }
- fun getRecurringDaysText(alarm: Alarm):String? {
+
+fun getRecurringDaysText(alarm: Alarm): String? {
     if (!alarm.recurring) {
         return null
     }
@@ -122,14 +125,18 @@ fun scheduleAlarm(alarm: Alarm,app:Application) {
     if (alarm.sunday) {
         days += "Su "
     }
-     return days
+    return days
 }
 
-fun cancelAlarm(alarm: Alarm,app:Application) {
+fun cancelAlarm(alarm: Alarm, app: Application) {
     val alarmManager = app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     val intent = Intent(app, AlarmBroadcastReceiver::class.java)
     val pendingIntent = PendingIntent.getBroadcast(app, alarm.alarmId, intent, 0)
     alarmManager.cancel(pendingIntent)
+    alarm.started = false
 
-    Timber.i("Alarm set for ${alarm.hour}:${alarm.minute} with id ${alarm.alarmId} has been cancelled.")
+    Timber.i("Alarm set for ${alarm.hour}:${alarm.minute} with id ${alarm.alarmId} and started value is ${alarm.started} has been cancelled.")
+}
+ fun initiateEvent(event: MutableLiveData<Event<Unit>>){
+    event.value = Event(Unit)
 }
