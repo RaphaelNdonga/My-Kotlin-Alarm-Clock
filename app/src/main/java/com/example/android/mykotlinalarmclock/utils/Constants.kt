@@ -72,6 +72,7 @@ fun scheduleAlarm(alarm: Alarm, app: Application) {
         }
         Toast.makeText(app, toastText, Toast.LENGTH_SHORT).show()
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+        Timber.i("Trigger time is ${calendar.timeInMillis}")
     } else {
         var toastText: String? = null
         try {
@@ -93,10 +94,9 @@ fun scheduleAlarm(alarm: Alarm, app: Application) {
             RUN_DAILY,
             pendingIntent
         )
-
+        Timber.i("Trigger time is ${calendar.timeInMillis}")
     }
     alarm.started = true
-    Timber.i("Alarm set for ${alarm.hour}:${alarm.minute} with id ${alarm.alarmId} and started value is ${alarm.started} has been scheduled.")
 }
 
 fun getRecurringDaysText(alarm: Alarm): String? {

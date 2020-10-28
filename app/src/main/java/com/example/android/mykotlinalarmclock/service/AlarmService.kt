@@ -13,6 +13,7 @@ import com.example.android.mykotlinalarmclock.R
 import com.example.android.mykotlinalarmclock.activities.RingActivity
 import com.example.android.mykotlinalarmclock.utils.CHANNEL_ID
 import com.example.android.mykotlinalarmclock.utils.TITLE
+import timber.log.Timber
 
 class AlarmService : Service() {
     private lateinit var mediaPlayer: MediaPlayer
@@ -21,10 +22,12 @@ class AlarmService : Service() {
     override fun onCreate() {
         super.onCreate()
         mediaPlayer = MediaPlayer.create(this, R.raw.alarm)
+        mediaPlayer.isLooping = true
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Timber.i("Service is running...")
         val notificationIntent = Intent(this, RingActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
 
